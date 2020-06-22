@@ -13,6 +13,7 @@ for an arbitrary list of strings.
 __author__ = "???"
 
 import sys
+from collections import defaultdict
 
 
 def alphabetize(string):
@@ -27,11 +28,18 @@ def find_anagrams(words):
     Example:
     {'dgo': ['dog'], 'act': ['cat', 'act']}
     """
-    anagrams = {
-        alphabetize(word): [
-            w for w in words
-            if alphabetize(w) == alphabetize(word)]
-        for word in words}
+    # using just for loop
+    # anagrams_dict = {}
+    # for word in words:
+    #     if alphabetize(word) in anagrams_dict:
+    #         anagrams_dict[alphabetize(word)] += [word]
+    #     else:
+    #         anagrams_dict[alphabetize(word)] = [word]
+    # return anagrams_dict
+
+    # using list comperhension
+    anagrams = defaultdict(list)
+    [anagrams.setdefault(alphabetize(word), []).append(word) for word in words]
     return anagrams
 
 
